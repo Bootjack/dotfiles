@@ -1,0 +1,35 @@
+[user]
+  name = Jason Hinebaugh
+
+[color]
+  diff = true
+  interactive = true
+  ui = true
+
+[log]
+  abbrevCommit = true
+	date = short
+
+[pretty]
+  pretty = %C(yellow)%h%Creset %ad :: %ar %C(magenta)%d%Creset%n%C(cyan)%s%Creset %an%n
+
+[alias]
+  lg = log --graph --pretty=pretty
+  lga = log --all --graph --pretty=pretty
+	please = push --force-with-lease
+
+[core]
+	excludesfile = ~/.gitignore
+[github]
+	user = Bootjack
+[push]
+	default = simple
+[credential]
+	helper = osxkeychain
+[gpg]
+	program = gpg
+[filter "lfs"]
+	clean = git-lfs clean -- %f
+	smudge = git-lfs smudge -- %f
+	process = git-lfs filter-process
+	required = true
