@@ -22,6 +22,23 @@ function git_status_color {
   fi
 }
 
+function toggle_autotomy_branch {
+  if [ -z "$(git name-rev HEAD 2> /dev/null | grep master)" ]; then
+    git checkout master
+    if [ $? == 0 ]; then
+      unset RBENV_VERSION
+      echo_local_ruby 
+    fi
+  else
+    git checkout ndx_support
+    if [ $? == 0 ]; then
+      touch .ruby-version
+      rbenv local 2.4.2
+      echo_local_ruby 
+    fi
+  fi
+}
+
 function make_and_change_dir {
   # Some special variables starting with `$' are always available; $1 is the first argument passed
   mkdir $1
@@ -34,6 +51,7 @@ function parse_git_branch {
 }
 
 # Aliases
+alias autotune='toggle_autotomy_branch'
 alias be='bundle exec'
 alias ll='ls -alhH'
 alias mcd='make_and_change_dir'
