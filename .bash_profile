@@ -55,9 +55,10 @@ alias autotune='toggle_autotomy_branch'
 alias be='bundle exec'
 alias ll='ls -alhH'
 alias mcd='make_and_change_dir'
+alias mp='mpw -F none'
+alias mzn='minizinc --solver Gecode'
 alias so='source'
 alias static='python -m SimpleHTTPServer 8080'
-alias mzn='minizinc --solver Gecode'
 
 # Git
 test -f ~/.git-completion.bash && source $_
