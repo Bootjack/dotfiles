@@ -23,19 +23,24 @@ function git_status_color {
 }
 
 function toggle_autotomy_branch {
-  if [ -z "$(git name-rev HEAD 2> /dev/null | grep master)" ]; then
-    git checkout master
-    if [ $? == 0 ]; then
-      unset RBENV_VERSION
-      echo_local_ruby 
+  if [ "$(pwd | grep autotomy)" ]; then
+    git reset --hard
+    if [ -z "$(git name-rev HEAD 2> /dev/null | grep master)" ]; then
+      git checkout master
+      if [ $? == 0 ]; then
+        unset RBENV_VERSION
+      fi
+    else
+      git checkout ndx_support
+      if [ $? == 0 ]; then
+        touch .ruby-version
+        rbenv local 2.4.2
+      fi
     fi
+    echo_local_ruby 
+    bundle install
   else
-    git checkout ndx_support
-    if [ $? == 0 ]; then
-      touch .ruby-version
-      rbenv local 2.4.2
-      echo_local_ruby 
-    fi
+    echo "Oops. Wrong repo, dawg."
   fi
 }
 
